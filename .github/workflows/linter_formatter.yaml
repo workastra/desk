@@ -1,0 +1,42 @@
+---
+name: Code Quality Checks
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  javascript-quality:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 25.2.1
+      - run: npm ci
+      - run: npm run fmt -- --check
+      - run: npm run lint
+      - run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: true
+
+  yaml-quality:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v5
+      - run: pip install yamllint==1.37.1
+      - run: yamllint -c .yamllint.yaml --format github --strict .
