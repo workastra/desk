@@ -1,0 +1,1 @@
+export { PublicEnvironment } from './config';
