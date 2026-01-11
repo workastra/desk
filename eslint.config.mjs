@@ -1,9 +1,9 @@
 import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTs from 'eslint-config-next/typescript';
 import prettier from 'eslint-config-prettier/flat';
+import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import unusedImports from 'eslint-plugin-unused-imports';
 import { defineConfig, globalIgnores } from 'eslint/config';
-import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 
 const eslintConfig = defineConfig([
   ...nextVitals,
@@ -45,10 +45,12 @@ const eslintConfig = defineConfig([
         {
           cases: {
             camelCase: true,
-            pascalCase: true
+            pascalCase: true,
           },
-        }
-      ]
+        },
+      ],
+
+      'object-shorthand': 'error',
     },
   },
   prettier,
