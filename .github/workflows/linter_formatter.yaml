@@ -12,13 +12,26 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  linter-formatter:
+  yaml-lint:
     runs-on: ubuntu-24.04
-    name: Linter and Formatter
+    name: YAML Lint
     permissions:
       contents: read
-      actions: read
-      security-events: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Install yamllint
+        run: pip install yamllint==1.38.0
+      - name: Run yamllint
+        run: yamllint -c .yamllint.yaml --format github --strict .
+
+  codebase-lint:
+    runs-on: ubuntu-24.04
+    name: Codebase Lint
+    permissions:
+      contents: read
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6
@@ -31,10 +44,6 @@ jobs:
         with:
           node-version: 25.9.0
           cache: pnpm
-      - name: Install yamllint
-        run: pip install yamllint==1.38.0
-      - name: Run yamllint
-        run: yamllint -c .yamllint.yaml --format github --strict .
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
       - name: Check Formatting
@@ -43,6 +52,67 @@ jobs:
         run: pnpm run lint
       - name: Run Doctor
         run: pnpm run doctor --annotations
+      - name: Run TypeScript Compiler
+        run: pnpm run typecheck
+
+  test:
+    runs-on: ubuntu-24.04
+    name: Test
+    needs:
+      - yaml-lint
+      - codebase-lint
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 25.9.0
+          cache: pnpm
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Create .env.test
+        run: |
+          cat > .env.test << 'EOF'
+          NEXT_PUBLIC_APP_VERSION=development
+          APP_URL=http://localhost:3000
+          IAM_EXTERNAL_ISSUER_URL=http://localhost:9000
+          IAM_INTERNAL_ISSUER_URL=http://localhost:9000
+          IAM_TLS_SKIP_VERIFY=true
+          IAM_OAUTH_CLIENT_ID=workastra-desk
+          LOCK_MODE=in-memory
+          EOF
+      - name: Run Tests
+        run: pnpm run test
+
+  build:
+    runs-on: ubuntu-24.04
+    name: Build
+    needs:
+      - yaml-lint
+      - codebase-lint
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 25.9.0
+          cache: pnpm
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
       - name: Setup Environment
         run: mv .env.template .env
       - name: Build Project
