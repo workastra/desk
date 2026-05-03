@@ -5,38 +5,47 @@ on:
   pull_request:
   push:
     branches:
-      - main
+      - v0
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref_name }}
   cancel-in-progress: true
 
 jobs:
-  javascript-quality:
-    runs-on: ubuntu-latest
+  linter-formatter:
+    runs-on: ubuntu-24.04
+    name: Linter and Formatter
     permissions:
       contents: read
       actions: read
       security-events: write
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v6
+      - name: Checkout Repository
+        uses: actions/checkout@v6
         with:
-          node-version: 25.2.1
-      - run: npm ci
-      - run: npm run fmt -- --check
-      - run: npm run lint
-      - run: npm run build
+          fetch-depth: 0
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 25.9.0
+          cache: pnpm
+      - name: Install yamllint
+        run: pip install yamllint==1.38.0
+      - name: Run yamllint
+        run: yamllint -c .yamllint.yaml --format github --strict .
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Check Formatting
+        run: pnpm run fmt --check
+      - name: Run Linter
+        run: pnpm run lint
+      - name: Run Doctor
+        run: pnpm run doctor --annotations
+      - name: Setup Environment
+        run: mv .env.template .env
+      - name: Build Project
+        run: pnpm run build
         env:
           NEXT_TELEMETRY_DISABLED: true
-
-  yaml-quality:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      actions: read
-      security-events: write
-    steps:
-      - uses: actions/checkout@v5
-      - run: pip install yamllint==1.37.1
-      - run: yamllint -c .yamllint.yaml --format github --strict .

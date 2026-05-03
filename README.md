@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Workastra Desk
 
-## Getting Started
+The web frontend for the Workastra platform. A Next.js 16 App Router application with OIDC-based authentication (PKCE), a REST API, and a layered internal architecture.
 
-First, run the development server:
+## Prerequisites
+
+- Node.js 22+
+- pnpm 10+
+- An OIDC-compatible Identity Provider (e.g., Keycloak) reachable at `IAM_EXTERNAL_ISSUER_URL`
+
+## Setup
+
+1. Copy the environment template and fill in values:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.template .env
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Key variables:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variable                  | Description                                                     |
+| ------------------------- | --------------------------------------------------------------- |
+| `NEXT_PUBLIC_APP_VERSION` | Application version string (required at build time)             |
+| `APP_URL`                 | Public base URL of this application                             |
+| `IAM_EXTERNAL_ISSUER_URL` | OIDC issuer URL reachable by browsers                           |
+| `IAM_INTERNAL_ISSUER_URL` | OIDC issuer URL for server-to-server calls (k8s DNS)            |
+| `IAM_OAUTH_CLIENT_ID`     | OAuth2 client ID registered with the IdP                        |
+| `IAM_TLS_SKIP_VERIFY`     | Skip TLS verification for IAM (dev only)                        |
+| `LOCK_MODE`               | `in-memory` (single instance) or `distributed` (Redis/Postgres) |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Secrets are loaded from files under `secrets/` (not `.env`):
 
-## Learn More
+| File                           | Description                                               |
+| ------------------------------ | --------------------------------------------------------- |
+| `secrets/app_key`              | Session encryption key                                    |
+| `secrets/previous_keys`        | Previous encryption keys for rotation (newline-separated) |
+| `secrets/oauth2_client_secret` | OAuth2 client secret                                      |
 
-To learn more about Next.js, take a look at the following resources:
+## Development
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm run dev              # Start dev server on http://localhost:3000
+pnpm run typecheck        # TypeScript type check
+pnpm run lint             # ESLint
+pnpm run fmt --check      # Prettier format
+pnpm run test             # Vitest unit tests
+pnpm run doctor           # Lint code, detect dead-code
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Production Build
 
-## Deploy on Vercel
+```bash
+NEXT_PUBLIC_APP_VERSION=1.0.0 pnpm build
+pnpm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The build output is `standalone` (suitable for Docker/Kubernetes).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+docker build -t workastra-desk .
+```
+
+## Project Structure
+
+```
+src/
+├── proxy.ts                        — Next.js middleware: session guard + redirect logic
+├── app/                            — Next.js App Router (pages, API routes, layout)
+│   ├── layout.tsx                  — Root HTML shell, fonts, metadata
+│   ├── projects/page.tsx           — Protected projects page
+│   ├── openapi/route.ts            — Serves OpenAPI spec
+│   └── api/
+│       ├── oidc/login/             — Initiates OIDC login (PKCE)
+│       ├── oidc/callback/          — Handles OIDC callback, stores session
+│       └── v1/
+│           ├── health/live/        — Liveness probe
+│           ├── health/ready/       — Readiness probe
+│           └── profile/            — Authenticated user profile
+└── internal/
+    ├── base/                       — Technical primitives (config, cookie, crypto, session, date, url)
+    └── core/                       — Application features (authentication, AppShell)
+        └── features/
+            └── authentication/     — OIDC flow, token exchange, session management
+```
+
+See module-level READMEs for detailed contracts:
+
+- [src/app/README.md](src/app/README.md)
+- [src/internal/base/README.md](src/internal/base/README.md)
+- [src/internal/core/README.md](src/internal/core/README.md)
+
+## API
+
+OpenAPI spec: [`public/openapi/v1.yaml`](public/openapi/v1.yaml)
+Interactive docs available at `/openapi` when the server is running.
+
+## Tech Stack
+
+| Layer           | Technology                               |
+| --------------- | ---------------------------------------- |
+| Framework       | Next.js 16, React 19                     |
+| Auth            | OIDC / OAuth 2.0 PKCE via `oauth4webapi` |
+| Session         | `iron-session` (encrypted cookie)        |
+| UI              | HeroUI, Tailwind CSS 4, Lucide icons     |
+| Validation      | Zod 4                                    |
+| Testing         | Vitest, Testing Library, happy-dom       |
+| Package manager | pnpm                                     |

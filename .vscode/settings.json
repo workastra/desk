@@ -1,3 +1,23 @@
 {
-  "editor.fontSize": 18
+  "editor.fontSize": 18,
+  "chat.useNestedAgentsMdFiles": true,
+  "chat.useAgentSkills": true,
+  "chat.extensionUnification.enabled": true,
+  "yaml.schemas": {
+    "https://www.schemastore.org/openapi-3.X.json": "openapi/v[0-9].yaml"
+  },
+  "git.addAICoAuthor": "off",
+  "github.copilot.chat.responsesApi.toolSearchTool.enabled": true,
+  "github.copilot.chat.skillTool.enabled": true,
+  "chat.experimental.symbolTools.cacheStable": true,
+  "json.schemaDownload.trustedDomains": {
+    "https://schemastore.azurewebsites.net/": true,
+    "https://raw.githubusercontent.com/microsoft/vscode/": true,
+    "https://raw.githubusercontent.com/devcontainers/spec/": true,
+    "https://www.schemastore.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://json-schema.org/": true,
+    "https://developer.microsoft.com/json-schemas/": true,
+    "https://unpkg.com/knip@latest/schema.json": true
+  }
 }

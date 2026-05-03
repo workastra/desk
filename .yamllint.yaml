@@ -4,6 +4,9 @@ yaml-files:
   - '*.yml'
   - .yamllint
 
+ignore:
+  - pnpm-lock.yaml
+
 rules:
   anchors: enable
   braces:
