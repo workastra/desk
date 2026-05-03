@@ -14,7 +14,7 @@ const config: Config = {
   semi: true,
 
   // Plugins
-  plugins: ['@tailwindcss/postcss', '@trivago/prettier-plugin-sort-imports'],
+  plugins: ['@tailwindcss/postcss', '@ianvs/prettier-plugin-sort-imports'],
   importOrder: [
     'server-only',
     '<BUILTIN_MODULES>',
@@ -24,8 +24,8 @@ const config: Config = {
     '<THIRD_PARTY_MODULES>',
     '^[./]',
   ],
-  importOrderSeparation: false,
-  importOrderSortSpecifiers: true,
+  importOrderTypeScriptVersion: '5.9.3',
+  importOrderCaseSensitive: true,
 };
 
 export default config;

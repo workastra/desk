@@ -1,4 +1,5 @@
 'use client';
+
 import { Button } from '@heroui/react';
 import { PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import { useWorkspaceLayoutActions, useWorkspaceLayoutState } from '../context';

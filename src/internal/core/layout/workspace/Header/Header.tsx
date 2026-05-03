@@ -1,4 +1,5 @@
 'use client';
+
 import { Button } from '@heroui/react';
 import { UserProfileButton } from '@internal/core/features/authentication/client';
 import { BellIcon } from 'lucide-react';
