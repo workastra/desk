@@ -59,7 +59,7 @@
     "prettier": "3.8.3",
     "react-doctor": "0.0.42",
     "server-only": "0.0.1",
-    "tailwindcss": "4.1.18",
+    "tailwindcss": "4.2.4",
     "typescript": "5.9.3",
     "typescript-eslint": "8.53.1",
     "vite-tsconfig-paths": "6.1.1",
