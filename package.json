@@ -55,7 +55,7 @@
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-unicorn": "64.0.0",
     "eslint-plugin-unused-imports": "4.4.1",
-    "happy-dom": "20.3.9",
+    "happy-dom": "20.8.9",
     "prettier": "3.8.3",
     "react-doctor": "0.0.42",
     "server-only": "0.0.1",
