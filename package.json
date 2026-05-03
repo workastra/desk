@@ -11,7 +11,7 @@
     "test": "node --env-file=.env.test ./node_modules/vitest/vitest.mjs",
     "lint": "eslint",
     "fmt": "prettier .",
-    "doctor": "react-doctor . --offline --yes --fail-on warning --verbose",
+    "doctor": "pnpm dlx react-doctor@0.0.42 . --offline --yes --fail-on warning --verbose",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -57,7 +57,6 @@
     "eslint-plugin-unused-imports": "4.4.1",
     "happy-dom": "20.9.0",
     "prettier": "3.8.3",
-    "react-doctor": "0.0.42",
     "server-only": "0.0.1",
     "tailwindcss": "4.2.4",
     "typescript": "5.9.3",
