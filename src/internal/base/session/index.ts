@@ -88,7 +88,7 @@ class SessionManager<T extends z.ZodObject> {
     const data = await this.#store.read();
     const result = this.#schema.safeParse(data);
 
-    return result.success ? (result.data as Readonly<z.infer<T>>) : undefined;
+    return result.success ? result.data : undefined;
   }
 
   /** Replace session data with a new validated object */
