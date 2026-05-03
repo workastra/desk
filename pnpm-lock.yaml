@@ -20,9 +20,6 @@ importers:
       '@t3-oss/env-nextjs':
         specifier: 0.13.11
         version: 0.13.11(typescript@5.9.3)(zod@4.3.6)
-      client-only:
-        specifier: 0.0.1
-        version: 0.0.1
       cookie:
         specifier: 1.1.1
         version: 1.1.1
@@ -32,9 +29,6 @@ importers:
       es-toolkit:
         specifier: 1.46.0
         version: 1.46.0
-      eslint-plugin-boundaries:
-        specifier: 6.0.2
-        version: 6.0.2(@typescript-eslint/parser@8.59.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))
       http-status-codes:
         specifier: 2.3.0
         version: 2.3.0
@@ -108,6 +102,9 @@ importers:
       '@vitest/coverage-v8':
         specifier: 4.1.5
         version: 4.1.5(vitest@4.1.5)
+      client-only:
+        specifier: 0.0.1
+        version: 0.0.1
       eslint:
         specifier: 9.39.2
         version: 9.39.2(jiti@2.6.1)
@@ -117,6 +114,9 @@ importers:
       eslint-config-prettier:
         specifier: 10.1.8
         version: 10.1.8(eslint@9.39.2(jiti@2.6.1))
+      eslint-plugin-boundaries:
+        specifier: 6.0.2
+        version: 6.0.2(@typescript-eslint/parser@8.59.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))
       eslint-plugin-unicorn:
         specifier: 64.0.0
         version: 64.0.0(eslint@9.39.2(jiti@2.6.1))
