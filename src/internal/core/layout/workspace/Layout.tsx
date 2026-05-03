@@ -1,11 +1,11 @@
 'use client';
 
-import { type PropsWithChildren, useMemo, useState } from 'react';
+import { useMemo, useState, type PropsWithChildren } from 'react';
 import {
-  type WorkspaceLayoutActions,
   WorkspaceLayoutActionsContext,
-  type WorkspaceLayoutState,
   WorkspaceLayoutStateContext,
+  type WorkspaceLayoutActions,
+  type WorkspaceLayoutState,
 } from '@internal/core/layout/workspace/context';
 import { ShellRoot } from './ShellRoot/ShellRoot';
 
