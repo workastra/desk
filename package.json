@@ -15,7 +15,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@heroui/react": "3.0.3",
+    "@heroui/react": "3.0.5",
     "@heroui/styles": "3.0.3",
     "@scalar/nextjs-api-reference": "0.10.16",
     "@t3-oss/env-nextjs": "0.13.11",
