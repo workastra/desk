@@ -34,7 +34,7 @@
     "quick-lru": "7.3.0",
     "react": "19.2.6",
     "react-dom": "19.2.5",
-    "ufo": "1.6.3",
+    "ufo": "1.6.4",
     "zod": "4.3.6"
   },
   "devDependencies": {
