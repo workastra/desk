@@ -33,7 +33,7 @@
     "oauth4webapi": "3.8.6",
     "quick-lru": "7.3.0",
     "react": "19.2.6",
-    "react-dom": "19.2.5",
+    "react-dom": "19.2.6",
     "ufo": "1.6.3",
     "zod": "4.3.6"
   },
