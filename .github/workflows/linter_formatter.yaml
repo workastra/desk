@@ -38,7 +38,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup PNPM
-        uses: pnpm/action-setup@v6.0.6
+        uses: pnpm/action-setup@v6.0.8
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
@@ -67,7 +67,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v6
       - name: Setup PNPM
-        uses: pnpm/action-setup@v6.0.6
+        uses: pnpm/action-setup@v6.0.8
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
