@@ -57,16 +57,19 @@ export async function decrypt(
   if (resolvedKeys.length === 0) {
     throw new Error('At least one key is required for decryption');
   }
+
   let lastError: unknown;
 
-  for (const key of resolvedKeys) {
-    try {
-      const { plaintext } = await compactDecrypt(encryptedText, encoder.encode(key));
+  try {
+    return await Promise.any(
+      resolvedKeys.map(async (key) => {
+        const { plaintext } = await compactDecrypt(encryptedText, encoder.encode(key));
 
-      return new TextDecoder().decode(plaintext);
-    } catch (error) {
-      lastError = error;
-    }
+        return new TextDecoder().decode(plaintext);
+      }),
+    );
+  } catch (error) {
+    lastError = error instanceof AggregateError ? error.errors.at(-1) : error;
   }
 
   throw new Error('Failed to decrypt payload with all available keys', { cause: lastError });

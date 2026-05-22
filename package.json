@@ -11,7 +11,7 @@
     "test": "node --env-file=.env.test ./node_modules/vitest/vitest.mjs",
     "lint": "eslint",
     "fmt": "prettier .",
-    "doctor": "pnpm dlx react-doctor@0.2.2 . --offline --yes --fail-on warning --verbose",
+    "doctor": "pnpm dlx react-doctor@0.2.1 --offline --full --fail-on warning",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
