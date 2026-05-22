@@ -66,8 +66,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
       - name: Setup PNPM
         uses: pnpm/action-setup@v6.0.6
       - name: Setup Node.js
@@ -102,20 +100,11 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v4.0.0
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4.1.0
+      - name: Build
+        uses: docker/build-push-action@v7.2.0
         with:
-          fetch-depth: 0
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v6.0.6
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version-file: package.json
-          cache: pnpm
-      - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
-      - name: Setup Environment
-        run: mv .env.template .env
-      - name: Build Project
-        run: pnpm run build
-        env:
-          NEXT_TELEMETRY_DISABLED: true
+          push: false
