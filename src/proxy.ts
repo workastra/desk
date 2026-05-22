@@ -59,24 +59,19 @@ export default async function proxy(request: NextRequest) {
     }
   }
 
-  if (!isAuthenticated) {
-    // Destroy session if the session is exists but invalid (e.g., expired, revoked, etc.) to prevent infinite redirect loop
-    const sessionManager = getSessionManager(AuthenticationSessionSchema);
+  if (isAuthenticated && isAuthRoute) {
+    return NextResponse.redirect(new URL('/', request.nextUrl));
+  }
+
+  // Destroy session if the session is exists but invalid (e.g., expired, revoked, etc.) to prevent infinite redirect loop
+  const sessionManager = getSessionManager(AuthenticationSessionSchema);
+
+  if (await sessionManager.exists()) {
     await sessionManager.destroy();
-
-    if (isProtectedRoute) {
-      return NextResponse.redirect(new URL('/api/oidc/login', request.nextUrl));
-    }
   }
 
-  // Redirect to home if the user is authenticated and tries to access login or signup pages
-  if (isAuthRoute && isAuthenticated) {
-    return NextResponse.redirect(new URL('/', request.nextUrl));
-  }
-
-  // Redirect to home if the user is not authenticated and tries to access protected routes
-  if (isProtectedRoute && !isAuthenticated) {
-    return NextResponse.redirect(new URL('/', request.nextUrl));
+  if (isProtectedRoute) {
+    return NextResponse.redirect(new URL('/api/oidc/login', request.nextUrl));
   }
 
   return NextResponse.next();

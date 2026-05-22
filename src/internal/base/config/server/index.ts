@@ -26,10 +26,11 @@ function createServerEnvironments() {
             return [];
           }
 
-          return value
-            .split(/[\r\n,]+/)
-            .map((key) => key.trim())
-            .filter(Boolean);
+          return value.split(/[\r\n,]+/).flatMap((key) => {
+            const trimmed = key.trim();
+
+            return trimmed ? [trimmed] : [];
+          });
         }),
       IAM_EXTERNAL_ISSUER_URL: z.url().transform((value) => new URL(value)),
       IAM_INTERNAL_ISSUER_URL: z.url().transform((value) => new URL(value)),

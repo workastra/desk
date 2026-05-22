@@ -80,8 +80,7 @@ describe('encrypt / decrypt - Happy Path', () => {
   it('produces different ciphertexts for the same plaintext (Nonces/IVs)', async () => {
     const key = genKey();
 
-    const a = await encrypt('same-data', key);
-    const b = await encrypt('same-data', key);
+    const [a, b] = await Promise.all([encrypt('same-data', key), encrypt('same-data', key)]);
 
     // Security requirement: Encrypting the same data twice should result in
     // different outputs to prevent pattern analysis.
@@ -92,10 +91,13 @@ describe('encrypt / decrypt - Happy Path', () => {
     const key = genKey();
 
     const cases = ['', '🚀🔥💯', '{"json":true}', 'a'.repeat(1024 * 1024)];
-    for (const input of cases) {
-      const encrypted = await encrypt(input, key);
-      await expect(decrypt(encrypted, [key])).resolves.toBe(input);
-    }
+
+    await Promise.all(
+      cases.map(async (input) => {
+        const encrypted = await encrypt(input, key);
+        await expect(decrypt(encrypted, [key])).resolves.toBe(input);
+      }),
+    );
   });
 });
 
