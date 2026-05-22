@@ -2,11 +2,11 @@
 # Section 1: Base Image Setup
 # Purpose: Sets up the foundation with Node.js and pnpm
 # ====================================================
-FROM node:25.4.0-alpine3.23 AS base
+FROM node:26.2.0-alpine3.23 AS base
 
 # Remove existing yarn installations to ensure pnpm is the primary package manager
 RUN rm -f /usr/local/bin/yarn /usr/local/bin/yarnpkg \
-    && npm install -g corepack@0.34.6 \
+    && npm install -g corepack@0.35.0 \
     && corepack enable pnpm
 
 
@@ -58,7 +58,7 @@ RUN NEXT_PUBLIC_APP_VERSION="$(node -p "require('./package.json').version")"+${G
 # Section 3: Production Runtime
 # Purpose: Minimal image for running the application
 # ====================================================
-FROM node:25.4.0-alpine3.23 AS runner
+FROM node:26.2.0-alpine3.23 AS runner
 
 # Set working directory
 WORKDIR /workastra-desk
