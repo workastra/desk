@@ -27,6 +27,26 @@ jobs:
       - name: Run yamllint
         run: yamllint -c .yamllint.yaml --format github --strict .
 
+  hadolint:
+    runs-on: ubuntu-24.04
+    name: Hadolint
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+      - uses: hadolint/hadolint-action@v3.3.0
+        with:
+          recursive: true
+          format: sarif
+          output-file: ${{ runner.temp }}/hadolint.sarif
+      - if: always()
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: ${{ runner.temp }}/hadolint.sarif
+          category: Hadolint
+
   codebase-lint:
     runs-on: ubuntu-24.04
     name: Codebase Lint
