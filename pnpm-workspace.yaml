@@ -1,5 +1,10 @@
----
 engineStrict: true
+
 allowBuilds:
+  esbuild: true
+  msw: true
   sharp: true
-  unrs-resolver: true
+
+packages:
+  - "apps/*"
+  - "packages/*"
