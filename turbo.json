@@ -9,15 +9,19 @@
     },
     "lint": {
       "dependsOn": ["^lint"],
-      "cache": false,
+      "cache": false
     },
-    "format": {
-      "dependsOn": ["^format"],
-      "cache": false,
+    "format:fix": {
+      "dependsOn": ["^format:fix"],
+      "cache": false
+    },
+    "format:check": {
+      "dependsOn": ["^format:check"],
+      "cache": false
     },
     "typecheck": {
       "dependsOn": ["^typecheck"],
-      "cache": false,
+      "cache": false
     },
     "dev": {
       "cache": false,

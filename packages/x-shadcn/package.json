@@ -1,6 +1,6 @@
 {
-  "name": "web",
-  "version": "0.0.1",
+  "name": "@universe/x-shadcn",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "imports": {
@@ -8,31 +8,39 @@
     "#lib/*": "./src/lib/*.ts",
     "#hooks/*": "./src/hooks/*.ts"
   },
+  "exports": {
+    "./globals.css": "./src/styles/globals.css",
+    "./postcss.config": "./postcss.config.mjs",
+    "./lib/*": "./src/lib/*.ts",
+    "./components/*": "./src/components/*.tsx",
+    "./hooks/*": "./src/hooks/*.ts"
+  },
   "scripts": {
-    "build": "next build",
-    "dev": "next dev",
     "format:check": "prettier --check .",
     "format:fix": "prettier --write .",
-    "lint": "eslint",
-    "start": "next start",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@universe/x-shadcn": "workspace:*",
+    "@base-ui/react": "catalog:",
+    "class-variance-authority": "catalog:",
+    "clsx": "catalog:",
     "lucide-react": "catalog:",
-    "next": "catalog:",
     "next-themes": "catalog:",
     "react": "catalog:",
-    "react-dom": "catalog:"
+    "react-dom": "catalog:",
+    "shadcn": "catalog:",
+    "tailwind-merge": "catalog:",
+    "tw-animate-css": "catalog:",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "catalog:",
+    "@turbo/gen": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@universe/eslint-config": "workspace:^",
     "@universe/typescript-config": "workspace:*",
-    "eslint": "catalog:",
+    "tailwindcss": "catalog:",
     "typescript": "catalog:"
   }
 }

@@ -1,8 +1,9 @@
 import { PropsWithChildren } from 'react';
 import { Geist_Mono, Inter } from 'next/font/google';
-import { ThemeProvider } from '@/components/theme-provider';
-import '@workspace/ui/globals.css';
-import { cn } from '@workspace/ui/lib/utils';
+import { TooltipProvider } from '@universe/x-shadcn/components/tooltip';
+import { cn } from '@universe/x-shadcn/lib/utils';
+import { ThemeProvider } from '#components/theme-provider';
+import '@universe/x-shadcn/globals.css';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -22,7 +23,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
       className={cn('antialiased', fontMono.variable, inter.variable)}
     >
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <TooltipProvider>{children}</TooltipProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

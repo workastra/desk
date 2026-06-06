@@ -1,4 +1,4 @@
-import { Button } from '@workspace/ui/components/button';
+import { Button } from '@universe/x-shadcn/components/button';
 
 export default function Page() {
   return (

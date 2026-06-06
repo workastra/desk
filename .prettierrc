@@ -10,17 +10,18 @@
   "arrowParens": "always",
   "jsxSingleQuote": true,
   "plugins": ["prettier-plugin-tailwindcss", "@ianvs/prettier-plugin-sort-imports"],
-  "tailwindStylesheet": "packages/ui/src/styles/globals.css",
+  "tailwindStylesheet": "packages/x-shadcn/src/styles/globals.css",
   "tailwindFunctions": ["cn", "cva"],
   "importOrder": [
     "server-only",
     "<BUILTIN_MODULES>",
-    "^react$",
+    "^react",
     "^next",
     "<THIRD_PARTY_MODULES>",
-    "^@",
-    "^[./]"
+    "^@universe/(?!.*\\.css$)(.*)$",
+    "^#(?!.*\\.css$)(.*)$",
+    "^.*\\.css$"
   ],
-  "importOrderTypeScriptVersion": "5.9.3",
+  "importOrderSafeSideEffects": ["^.*\\.css$"],
   "importOrderCaseSensitive": true
 }
