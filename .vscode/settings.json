@@ -1,15 +1,5 @@
 {
-  "editor.fontSize": 18,
-  "chat.useNestedAgentsMdFiles": true,
-  "chat.useAgentSkills": true,
-  "chat.extensionUnification.enabled": true,
-  "yaml.schemas": {
-    "https://www.schemastore.org/openapi-3.X.json": "openapi/v[0-9].yaml"
-  },
-  "git.addAICoAuthor": "off",
-  "github.copilot.chat.responsesApi.toolSearchTool.enabled": true,
-  "github.copilot.chat.skillTool.enabled": true,
-  "chat.experimental.symbolTools.cacheStable": true,
+  "json.schemaDownload.enable": true,
   "json.schemaDownload.trustedDomains": {
     "https://schemastore.azurewebsites.net/": true,
     "https://raw.githubusercontent.com/microsoft/vscode/": true,
@@ -18,6 +8,16 @@
     "https://json.schemastore.org/": true,
     "https://json-schema.org/": true,
     "https://developer.microsoft.com/json-schemas/": true,
-    "https://unpkg.com/knip@latest/schema.json": true
-  }
+    "https://turbo.build/schema.json": true,
+    "https://ui.shadcn.com/schema.json": true,
+    "https://react.doctor/schema/config.json": true,
+    "https://unpkg.com/@changesets/config@3.1.4/schema.json": true,
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "tailwindCSS.classFunctions": ["cn", "cva"],
 }

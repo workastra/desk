@@ -1,0 +1,14 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@3.1.4/schema.json",
+  "changelog": ["@changesets/changelog-github", { "repo": "workastra/desk" }],
+  "commit": false,
+  "fixed": [
+    ["@workastra/web", "@universe/eslint-config", "@universe/typescript-config", "@universe/x-shadcn"]
+  ],
+  "linked": [],
+  "access": "restricted",
+  "baseBranch": "v0",
+  "updateInternalDependencies": "patch",
+  "ignore": [],
+  "prettier": true
+}

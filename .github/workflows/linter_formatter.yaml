@@ -67,11 +67,11 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
       - name: Check Formatting
-        run: pnpm run fmt --check
+        run: pnpm run format:check
       - name: Run Linter
         run: pnpm run lint
       - name: Run Doctor
-        run: pnpm run doctor --annotations
+        run: pnpm run doctor
       - name: Run TypeScript Compiler
         run: pnpm run typecheck
 

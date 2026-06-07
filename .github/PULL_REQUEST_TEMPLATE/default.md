@@ -1,62 +1,24 @@
 ## Summary
 
-<!-- What does this PR change? Why is it needed? -->
+<!-- What changed? -->
 
--
+## Why
 
-## Changes
-
-<!-- Key implementation details -->
-
--
--
--
-
-## Screenshots / Demo
-
-<!-- UI changes, API responses, logs, etc. -->
-
-| Before | After |
-| ------ | ----- |
-|        |       |
+<!-- Why is this change needed? -->
 
 ## Testing
 
 <!-- How was this verified? -->
 
-- [ ] Unit tests
-- [ ] Integration tests
+- [ ] Automated tests
 - [ ] Manual testing
 
-### Verification Steps
+## Risks
 
-1.
-2.
-3.
+<!-- Any known risks, breaking changes, migrations, or deployment concerns? -->
 
-## Breaking Changes
+- [ ] No known risks
 
-<!-- Any migration or compatibility impact? -->
+## Screenshots
 
-- [ ] No breaking changes
-- [ ] Breaking changes
-
-Details:
-
--
-
-## Checklist
-
-- [ ] Code follows existing project conventions
-- [ ] No unrelated refactoring
-- [ ] Added/updated tests where necessary
-- [ ] Documentation updated if needed
-- [ ] Verified backward compatibility
-- [ ] No sensitive data or secrets committed
-
-## Related
-
-<!-- Issues, discussions, dependent PRs -->
-
-- Closes #
-- Related #
+<!-- UI changes only -->

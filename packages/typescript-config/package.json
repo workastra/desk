@@ -1,0 +1,13 @@
+{
+  "name": "@universe/typescript-config",
+  "version": "0.0.0",
+  "private": true,
+  "license": "PROPRIETARY",
+  "scripts": {
+    "format:check": "prettier --check .",
+    "format:fix": "prettier --write ."
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
