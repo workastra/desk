@@ -1,3 +1,4 @@
+---
 engineStrict: true
 
 allowBuilds:
@@ -7,8 +8,8 @@ allowBuilds:
   sharp: true
 
 packages:
-  - 'apps/*'
-  - 'packages/*'
+  - apps/*
+  - packages/*
 
 catalogMode: strict
 cleanupUnusedCatalogs: true
