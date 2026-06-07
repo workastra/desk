@@ -1,7 +1,7 @@
 {
-  "name": "web",
-  "version": "0.0.1",
-  "private": true,
+  "name": "@workastra/web",
+  "version": "0.0.0",
+  "private": false,
   "type": "module",
   "imports": {
     "#components/*": "./src/components/*.tsx",

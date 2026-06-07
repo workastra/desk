@@ -10,6 +10,14 @@
     "https://developer.microsoft.com/json-schemas/": true,
     "https://turbo.build/schema.json": true,
     "https://ui.shadcn.com/schema.json": true,
-    "https://react.doctor/schema/config.json": true
-  }
+    "https://react.doctor/schema/config.json": true,
+    "https://unpkg.com/@changesets/config@3.1.4/schema.json": true,
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "tailwindCSS.classFunctions": ["cn", "cva"],
 }
