@@ -42,7 +42,7 @@ jobs:
           format: sarif
           output-file: ${{ runner.temp }}/hadolint.sarif
       - if: always()
-        uses: github/codeql-action/upload-sarif@v4.35.5
+        uses: github/codeql-action/upload-sarif@v4.37.2
         with:
           sarif_file: ${{ runner.temp }}/hadolint.sarif
           category: Hadolint
